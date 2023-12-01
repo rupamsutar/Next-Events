@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { getFilteredEvents } from "../../dummy-data";
 
 function FilteredEvents() {
   const router = useRouter();
@@ -24,6 +25,15 @@ function FilteredEvents() {
     numMonth < 1
   ) {
     return <h1 className="center">Invalid Filter, Please try again !</h1>;
+  }
+
+  const filteredEvents = getFilteredEvents({
+    year: numYear,
+    month: numMonth,
+  });
+
+  if (!filteredEvents || filteredEvents.length === 0) {
+    return <p>No events found for the chosen filter</p>;
   }
   return (
     <div className="">
